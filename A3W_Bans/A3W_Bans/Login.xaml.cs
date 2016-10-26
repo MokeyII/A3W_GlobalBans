@@ -42,6 +42,7 @@ namespace A3W_Bans
                 {
                     count = count + 1;
                 }
+
                 if (count == 1)
                 {
                     MessageBox.Show("You Have Succesfully Logged Into A3W Bans Database, Please remember all of your bans are subject for review.");
@@ -49,13 +50,15 @@ namespace A3W_Bans
                     SubmitBan SubBan = new SubmitBan();
                     SubBan.ShowDialog();
                 }
+
                 else if (count > 1)
                 {
                     MessageBox.Show("Duplicate Username and Password!");
                 }
+
                 else
                     MessageBox.Show("Incorrect Username or Password!");
-                myConn.Close();
+                        myConn.Close();
             }
             catch (Exception ex)
             {

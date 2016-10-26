@@ -8,7 +8,7 @@
         Title="A3W Global Bans (Early Alpha)" Height="347.293" Width="673.208" Background="#FF7E7D7D">
     <Grid>
         <DataGrid x:Name="dgBansList" Margin="10,10,10,51" RenderTransformOrigin="0.5,0.5"/>
-        <Button x:Name="btnSearchDB" Content="Search" Margin="10,270,580,26"/>
-        <Button x:Name="btnMainSubmitBan" Content="Submit A Global Ban" Margin="0,270,10,26" Click="btnMainSubmitBan_Click" HorizontalAlignment="Right" Width="127"/>
+        <Button x:Name="btnSearchDB" Content="Search" Margin="10,0,0,10" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75"/>
+        <Button x:Name="btnMainSubmitBan" Content="Submit A Global Ban" Margin="0,0,10,10" Click="btnMainSubmitBan_Click" HorizontalAlignment="Right" Width="127" Height="36" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
