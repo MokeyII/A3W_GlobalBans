@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-
 namespace A3W_Bans
 {
     /// <summary>
@@ -24,6 +23,7 @@ namespace A3W_Bans
         {
             InitializeComponent();
             txtSqlPassword.MaxLength = 16;
+            
         }
 
         private void btnSqlLogin_Click(object sender, RoutedEventArgs e)
@@ -33,7 +33,7 @@ namespace A3W_Bans
             {
                 string myConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
                 MySqlConnection myConn = new MySqlConnection(myConnection);
-                MySqlCommand SelectCommand = new MySqlCommand("select * from bans.admins where Username = '" + this.txtSqlUserName.Text + "'and Password= '" + this.txtSqlPassword.Text + "' ;", myConn);
+                MySqlCommand SelectCommand = new MySqlCommand("select * from bans.admins where Username = '" + this.txtSqlUserName.Text + "'and Password= '" + this.txtSqlPassword.Password + "' ;", myConn);
                 MySqlDataReader myReader;
                 myConn.Open();
                 myReader = SelectCommand.ExecuteReader();

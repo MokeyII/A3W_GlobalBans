@@ -7,14 +7,15 @@
         mc:Ignorable="d"
         Title="Login" Height="300" Width="300" Background="#FF7E7D7D">
     <Grid RenderTransformOrigin="0.491,0.49">
-        <GroupBox x:Name="gbLogin" Header="Login Credentials" HorizontalAlignment="Left" Margin="38,114,0,0" VerticalAlignment="Top" Height="145" Width="227"/>
-        <Button x:Name="btnSqlLogin" Content="Login" Margin="177,212,40,26" Click="btnSqlLogin_Click"/>
-        <TextBox x:Name="txtSqlPassword" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Password" ToolTip="Type in your password here." VerticalAlignment="Top" Width="120" Margin="127,178,0,0"/>
-        <TextBox x:Name="txtSqlUserName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Username" ToolTip="Type in your Username here." VerticalAlignment="Top" Width="120" Margin="127,141,0,0"/>
-        <Label x:Name="lblUserName" Content="UserName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,138,0,0"/>
-        <Label x:Name="lblPassword" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,175,0,0" RenderTransformOrigin="0.515,0.628"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="104,9,0,0" VerticalAlignment="Top" Width="100"/>
-        <Image x:Name="LoginImg_png" Margin="100,18,100,155" Source="LoginImg.png" Stretch="Fill"/>
+        <GroupBox x:Name="gbLogin" Header="Login Credentials" HorizontalAlignment="Left" Margin="41,115,0,0" VerticalAlignment="Top" Height="144" Width="224">
+            <PasswordBox x:Name="txtSqlPassword" HorizontalAlignment="Left" Margin="81,46,0,0" VerticalAlignment="Top" Width="118" Height="23" Password="Password"/>
+        </GroupBox>
+        <Button x:Name="btnSqlLogin" Content="Login" Margin="178,212,40,26" Click="btnSqlLogin_Click"/>
+        <TextBox x:Name="txtSqlUserName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Username" ToolTip="Type in your Username here." VerticalAlignment="Top" Width="118" Margin="129,142,0,0"/>
+        <Label x:Name="lblUserName" Content="UserName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="56,139,0,0" Height="26" Width="68"/>
+        <Label x:Name="lblPassword" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="62,176,0,0" RenderTransformOrigin="0.515,0.628" Height="26" Width="62"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="99" Margin="106,12,0,0" VerticalAlignment="Top" Width="99"/>
+        <Image x:Name="LoginImg_png" Margin="102,20,99,154" Source="LoginImg.png" Stretch="Fill"/>
 
     </Grid>
 </Window>
