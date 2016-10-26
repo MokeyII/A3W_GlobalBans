@@ -1,0 +1,14 @@
+﻿<Window x:Name="A3W_Global_Ban" x:Class="A3W_Bans.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:A3W_Bans"
+        mc:Ignorable="d"
+        Title="A3W Global Bans (Early Alpha)" Height="347.293" Width="673.208" Background="#FF7E7D7D">
+    <Grid>
+        <DataGrid x:Name="dgBansList" Margin="10,10,10,51" RenderTransformOrigin="0.5,0.5"/>
+        <Button x:Name="btnSearchDB" Content="Search" Margin="10,270,580,26"/>
+        <Button x:Name="btnMainSubmitBan" Content="Submit A Global Ban" Margin="0,270,10,26" Click="btnMainSubmitBan_Click" HorizontalAlignment="Right" Width="127"/>
+    </Grid>
+</Window>
