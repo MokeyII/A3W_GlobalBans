@@ -15,5 +15,6 @@
         <Label x:Name="label" Content="A3Bans" HorizontalAlignment="Left" Margin="16,2,0,0" VerticalAlignment="Top" Foreground="LightGray"/>
         <Rectangle x:Name="titleBar" Margin="10,3,10,0" Stroke="#FFDACCCC" StrokeThickness="0.25" Height="28" VerticalAlignment="Top"/>
         <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="16,455,0,0" VerticalAlignment="Top"  Width="125" Height="35" Click="btnRefresh_Click"/>
+        <Button x:Name="btnDLSql" Content="Download Bans" HorizontalAlignment="Left" Margin="485,455,0,0" VerticalAlignment="Top" Width="125" Height="35" Click="btnDLSql_Click"/>
     </Grid>
 </Window>
