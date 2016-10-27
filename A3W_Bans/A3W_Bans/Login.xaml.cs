@@ -65,5 +65,10 @@ namespace A3W_Bans
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
