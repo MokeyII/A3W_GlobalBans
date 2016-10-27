@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:A3W_Bans"
         mc:Ignorable="d"
-        Title="A3W Global Bans (Early Alpha)" Height="500" Width="750" ResizeMode="NoResize" WindowStartupLocation="Manual" BorderThickness="0" BorderBrush="Black" Foreground="Black" Background="Black">
+        Title="A3W Global Bans (Early Alpha)" Height="500" Width="750" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderThickness="0" BorderBrush="Black" Foreground="Black" Background="Black">
 
     <Grid>
-        <DataGrid x:Name="dgBansList" Margin="10,10,10,51" RenderTransformOrigin="0.5,0.5"/>
-        <Button x:Name="btnSearchDB" Content="Search" Margin="10,0,0,10" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75"/>
-        <Button x:Name="btnMainSubmitBan" Content="Submit A Global Ban" Margin="0,0,10,10" Click="btnMainSubmitBan_Click" HorizontalAlignment="Right" Width="127" Height="36" VerticalAlignment="Bottom"/>
-        <Label x:Name="lblInstructions" Content="Click on the Text Field then Hit ''CTRL+A'' to select all, followed by ''CTRL+C'' to copy., Then Paste it into a text file." HorizontalAlignment="Left" Margin="141,420,0,0" VerticalAlignment="Top" FontSize="8" Background="Black" Foreground="White"/>
+        <DataGrid x:Name="dgBansList" Margin="50,59,50,50" RenderTransformOrigin="0,0.5" SelectionChanged="dgBansList_SelectionChanged" GridLinesVisibility="None" CanUserResizeRows="False" FontFamily="Lucida Console" HeadersVisibility="None" ForceCursor="True" IsReadOnly="True"/>
+        <Button x:Name="btnMainSubmitBan" Content="Submit A Global Ban" Margin="0,0,10,10" Click="btnMainSubmitBan_Click" HorizontalAlignment="Right" Width="125" Height="35" VerticalAlignment="Bottom"/>
+        <Label x:Name="lblInstructions" Content="Click on the Text Field then Hit ''CTRL+A'' to select all, followed by ''CTRL+C'' to copy., Then Paste it into a text file." Margin="169,33,169,0" VerticalAlignment="Top" FontSize="8" Background="Black" Foreground="#FFAEA4A4"/>
+        <Button x:Name="btnClose" Content="X" HorizontalAlignment="Left" Margin="712,6,0,0" VerticalAlignment="Top" Width="25" Background="Black" Foreground="White" Height="22" Click="btnClose_Click" />
+        <Label x:Name="label" Content="A3Bans" HorizontalAlignment="Left" Margin="16,2,0,0" VerticalAlignment="Top" Foreground="LightGray"/>
+        <Rectangle x:Name="titleBar" Margin="10,3,10,0" Stroke="#FFDACCCC" StrokeThickness="0.25" Height="28" VerticalAlignment="Top"/>
+        <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="16,455,0,0" VerticalAlignment="Top"  Width="125" Height="35" Click="btnRefresh_Click"/>
     </Grid>
 </Window>

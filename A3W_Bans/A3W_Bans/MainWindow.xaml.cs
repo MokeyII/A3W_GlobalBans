@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using A3W_Bans.Classes;
-
+using System.Windows.Forms;
 namespace A3W_Bans
 {
     /// <summary>
@@ -27,8 +27,8 @@ namespace A3W_Bans
 
             //HERE
             InitializeComponent();
+            this.MouseLeftButtonDown += delegate { this.DragMove(); };
             this.Loaded += MainWindow_Loaded;
-      
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -36,33 +36,30 @@ namespace A3W_Bans
 
             List<tBan> bans = new List<Classes.tBan>();
 
-            string myConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
-            MySqlConnection myConn = new MySqlConnection(myConnection);
-            MySqlCommand SelectCommand = new MySqlCommand("select GUID,BanTime,Reason from bans.bans order by BanType asc", myConn);
+            string dbConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
+            MySqlConnection conDataBase = new MySqlConnection(dbConnection);
+            MySqlCommand SelectCommand = new MySqlCommand("select GUID,BanTime,Reason from bans.bans order by BanType asc", conDataBase);
 
-            MySqlDataReader myReader;
-            myConn.Open();
-            myReader = SelectCommand.ExecuteReader();
+            MySqlDataReader dbReader;
+            conDataBase.Open();
+            dbReader = SelectCommand.ExecuteReader();
 
-            while (myReader.Read())
+            while (dbReader.Read())
             {
                 tBan newBan = new tBan();
 
-                newBan.GuidOrIP = myReader["GUID"].ToString();
-                newBan.BanTime = myReader["BanTime"].ToString();
-                newBan.BanReason = myReader["Reason"].ToString();
-               // newBan.BanType = myReader["BanType"].ToString();
-               // newBan.BanProof = myReader["Proof"].ToString();
+                newBan.GuidOrIP = dbReader["GUID"].ToString();
+                newBan.BanTime = dbReader["BanTime"].ToString();
+                newBan.BanReason = dbReader["Reason"].ToString();
 
                 bans.Add(newBan);
-              
 
+   
             }
-            myReader.Close();
-            myConn.Close();
+            dbReader.Close();
+            conDataBase.Close();
 
             dgBansList.ItemsSource = bans;
-
 
         }
 
@@ -71,5 +68,46 @@ namespace A3W_Bans
             Login SqlLogin = new Login();
             SqlLogin.ShowDialog();
         }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            List<tBan> bans = new List<Classes.tBan>();
+
+            string dbConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
+            MySqlConnection conDataBase = new MySqlConnection(dbConnection);
+            MySqlCommand SelectCommand = new MySqlCommand("select GUID,BanTime,Reason from bans.bans order by BanType asc", conDataBase);
+
+            MySqlDataReader dbReader;
+            conDataBase.Open();
+            dbReader = SelectCommand.ExecuteReader();
+
+            while (dbReader.Read())
+            {
+                tBan newBan = new tBan();
+
+                newBan.GuidOrIP = dbReader["GUID"].ToString();
+                newBan.BanTime = dbReader["BanTime"].ToString();
+                newBan.BanReason = dbReader["Reason"].ToString();
+
+                bans.Add(newBan);
+
+
+            }
+            dbReader.Close();
+            conDataBase.Close();
+
+            dgBansList.ItemsSource = bans;
+        }
+
+        private void dgBansList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
+

@@ -12,7 +12,5 @@ namespace A3W_Bans.Classes
         public string GuidOrIP { get; set; }
         public string BanTime { get; set; }
         public string BanReason { get; set; }
-       // public string BanType { get; set; }
-       // public string BanProof { get; set; }
     }
 }

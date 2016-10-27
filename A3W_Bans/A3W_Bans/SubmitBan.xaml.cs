@@ -23,16 +23,17 @@ namespace A3W_Bans
         public SubmitBan()
         {
             InitializeComponent();
+            this.MouseLeftButtonDown += delegate { this.DragMove(); };
             txtID.MaxLength = 32;
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             string constring = "datasource=127.0.0.1;port=3306;username=root;password=12345;database=bans";
-            string Query = "insert into bans (GUID, BanTime, Reason, Proof,Bantype) Values('" + this.txtID.Text + "','" + this.txtBan.Text + "','" + this.txtReason.Text + "','" + this.txtProof.Text + "','" + this.cmbBanType.Text + "') ;";
+            string insertQuery = "insert into bans (GUID, BanTime, Reason, Proof,Bantype) Values('" + this.txtID.Text + "','" + this.txtBan.Text + "','" + this.txtReason.Text + "','" + this.txtProof.Text + "','" + this.cmbBanType.Text + "') ;";
             MySqlConnection conDataBase = new MySqlConnection(constring);
-            MySqlCommand cmdDataBase = new MySqlCommand(Query, conDataBase);
-            MySqlDataReader myReader;
+            MySqlCommand cmdDataBase = new MySqlCommand(insertQuery, conDataBase);
+            MySqlDataReader dbReader;
 
             if (txtID.Text.Length < 32)
             {
@@ -63,9 +64,9 @@ namespace A3W_Bans
                     if (confirmResult == MessageBoxResult.Yes)
                     {
                         conDataBase.Open();
-                        myReader = cmdDataBase.ExecuteReader();
+                        dbReader = cmdDataBase.ExecuteReader();
                         MessageBox.Show("Ban Submitted and Applied!");
-                        while (myReader.Read())
+                        while (dbReader.Read())
                         {
 
                         }
@@ -83,6 +84,17 @@ namespace A3W_Bans
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnCncl_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

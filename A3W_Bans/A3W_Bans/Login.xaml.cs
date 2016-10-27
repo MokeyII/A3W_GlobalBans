@@ -22,6 +22,7 @@ namespace A3W_Bans
         public Login()
         {
             InitializeComponent();
+            this.MouseLeftButtonDown += delegate { this.DragMove(); };
             txtSqlPassword.MaxLength = 16;
             
         }
@@ -31,11 +32,11 @@ namespace A3W_Bans
 
             try
             {
-                string myConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
-                MySqlConnection myConn = new MySqlConnection(myConnection);
-                MySqlCommand SelectCommand = new MySqlCommand("select * from bans.admins where Username = '" + this.txtSqlUserName.Text + "'and Password= '" + this.txtSqlPassword.Password + "' ;", myConn);
+                string dbConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
+                MySqlConnection conDataBase = new MySqlConnection(dbConnection);
+                MySqlCommand SelectCommand = new MySqlCommand("select * from bans.admins where Username = '" + this.txtSqlUserName.Text + "'and Password= '" + this.txtSqlPassword.Password + "' ;", conDataBase);
                 MySqlDataReader myReader;
-                myConn.Open();
+                conDataBase.Open();
                 myReader = SelectCommand.ExecuteReader();
                 int count = 0;
                 while (myReader.Read())
@@ -58,7 +59,7 @@ namespace A3W_Bans
 
                 else
                     MessageBox.Show("Incorrect Username or Password!");
-                        myConn.Close();
+                    conDataBase.Close();
             }
             catch (Exception ex)
             {
@@ -66,9 +67,17 @@ namespace A3W_Bans
             }
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        public void userNameclr(object sender, RoutedEventArgs e)
         {
-            
+            txtSqlUserName.Text = string.Empty;
+            // if you want this to happen only the first time you can remove the event handler like this
+            txtSqlUserName.GotFocus -= userNameclr;
+            txtSqlPassword.Clear();
+        }
+
+        private void btnSqlCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

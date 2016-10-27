@@ -1,0 +1,22 @@
+﻿<Window x:Class="A3W_Bans.SearchSql"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:A3W_Bans"
+        mc:Ignorable="d"
+        Title="SearchSql" Height="400" Width="300" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderThickness="0" BorderBrush="Black" Foreground="Black" Background="Black">
+    <Grid>
+        <Label x:Name="lblGUID" Content="GUID/IP:" HorizontalAlignment="Left" Height="29" Margin="0,27,0,0" VerticalAlignment="Top" Width="61" Foreground="#FFAEA4A4"/>
+        <Label x:Name="lblReason" Content="Reason:" Height="29" Margin="5,65,226,0" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
+        <Label x:Name="lblProof" Content="Proof:" HorizontalAlignment="Left" Height="29" Margin="10,103,0,0" VerticalAlignment="Top" Width="49" Foreground="#FFAEA4A4"/>
+        <TextBox x:Name="txtGUID" Height="23" Margin="71,31,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtReason" Height="23" Margin="71,69,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtProof" Margin="71,107,10,38" TextWrapping="Wrap" Text=""/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="215,367,0,0" VerticalAlignment="Top" Width="75" Click="btnSearch_Click" Background="#FFAEA4A4"/>
+        <Button x:Name="btnClose" Content="X" HorizontalAlignment="Left" Margin="265,4,0,0" VerticalAlignment="Top" Width="25" Background="Black" Foreground="White" Height="22" Click="btnClose_Click" />
+        <Label x:Name="label" Content="Search Bans" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFAEA4A4" Margin="36,0,0,0"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="71,367,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click" Background="#FFAEA4A4" IsCancel="True"/>
+
+    </Grid>
+</Window>

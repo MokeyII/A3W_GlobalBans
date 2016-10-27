@@ -10,13 +10,13 @@
         <GroupBox x:Name="gbLogin" Header="Login Credentials" HorizontalAlignment="Left" Margin="37,128,0,0" VerticalAlignment="Top" Height="144" Width="224" Foreground="#FFAEA4A4">
             <PasswordBox x:Name="txtSqlPassword" HorizontalAlignment="Left" Margin="81,46,0,0" VerticalAlignment="Top" Width="118" Height="23" Password="Password"/>
         </GroupBox>
-        <TextBox x:Name="txtSqlUserName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Username" ToolTip="Type in your Username here." VerticalAlignment="Top" Width="118" Margin="125,155,0,0"/>
+        <TextBox x:Name="txtSqlUserName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Username" ToolTip="Type in your Username here." VerticalAlignment="Top" Width="118" Margin="125,155,0,0" GotFocus="userNameclr"/>
         <Label x:Name="lblUserName" Content="UserName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,152,0,0" Height="26" Width="68" Foreground="#FFAEA4A4"/>
         <Label x:Name="lblPassword" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="58,189,0,0" RenderTransformOrigin="0.515,0.628" Height="26" Width="62" Background="{x:Null}" Foreground="#FFAEA4A4"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="99" Margin="102,25,0,0" VerticalAlignment="Top" Width="99"/>
-        <Image x:Name="LoginImg_png" Margin="98,33,103,141" Source="LoginImg.png" Stretch="Fill"/>
+        <Image x:Name="LoginImg_png" Margin="98,34,103,172" Source="LoginImg.png" Stretch="Fill"/>
         <Button x:Name="btnSqlLogin" Content="Login" Margin="151,225,54,40" Click="btnSqlLogin_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" Margin="51,225,154,40" Click="Cancel_Click" IsCancel="True"/>
+        <Button x:Name="btnSqlCancel" Content="Cancel" Margin="51,225,154,40" Click="btnSqlCancel_Click"/>
 
     </Grid>
 </Window>

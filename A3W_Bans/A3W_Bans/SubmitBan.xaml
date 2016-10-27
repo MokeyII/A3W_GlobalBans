@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:A3W_Bans"
         mc:Ignorable="d"
-        Title="Submit A Global Ban" Height="350" Width="525" Background="#FF7E7D7D">
+        Title="Submit A Global Ban" Height="350" Width="525" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderThickness="0" BorderBrush="Black" Foreground="Black" Background="Black">
     <Grid>
         <TextBox x:Name="txtID" HorizontalAlignment="Left" Height="24" Margin="92,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365"/>
-        <TextBlock x:Name="lblBanType" HorizontalAlignment="Left" Margin="37,30,0,0" TextWrapping="Wrap" Text="Ban Type:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="lblGUID" HorizontalAlignment="Left" Margin="56,52,0,0" TextWrapping="Wrap" Text="GUID:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="lblBanTime" HorizontalAlignment="Left" Margin="35,81,0,0" TextWrapping="Wrap" Text="Ban Time:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="lblReason" HorizontalAlignment="Left" Margin="46,109,0,0" TextWrapping="Wrap" Text="Reason:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="lblProof" HorizontalAlignment="Left" Margin="56,139,0,0" TextWrapping="Wrap" Text="Proof:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="lblBanType" HorizontalAlignment="Left" Margin="37,30,0,0" TextWrapping="Wrap" Text="Ban Type:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
+        <TextBlock x:Name="lblGUID" HorizontalAlignment="Left" Margin="56,52,0,0" TextWrapping="Wrap" Text="GUID:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
+        <TextBlock x:Name="lblBanTime" HorizontalAlignment="Left" Margin="35,81,0,0" TextWrapping="Wrap" Text="Ban Time:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
+        <TextBlock x:Name="lblReason" HorizontalAlignment="Left" Margin="46,109,0,0" TextWrapping="Wrap" Text="Reason:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
+        <TextBlock x:Name="lblProof" HorizontalAlignment="Left" Margin="56,139,0,0" TextWrapping="Wrap" Text="Proof:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
         <TextBox x:Name="txtBan" HorizontalAlignment="Left" Height="23" Margin="93,80,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="365"/>
         <TextBox x:Name="txtProof" HorizontalAlignment="Left" Height="141" Margin="93,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365" AcceptsReturn="True"/>
         <TextBox x:Name="txtReason" HorizontalAlignment="Left" Height="23" Margin="93,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365"/>
@@ -22,7 +22,8 @@
                 <ComboBoxItem Content="IP"/>
             </ComboBox.Items>
         </ComboBox>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="383,285,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.437,-0.916" Click="btnSubmit_Click"/>
-
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="383,285,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.437,-0.916" Click="btnSubmit_Click" Background="#FFAEA4A4"/>
+        <Button x:Name="btnClose" Content="X" HorizontalAlignment="Left" Margin="490,4,0,0" VerticalAlignment="Top" Width="25" Background="Black" Foreground="White" Height="22" Click="btnClose_Click" />
+        <Button x:Name="btnCncl" Content="Cancel" HorizontalAlignment="Left" Margin="92,285,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.437,-0.916" Click="btnCncl_Click" Background="#FFAEA4A4" IsCancel="True"/>
     </Grid>
 </Window>
