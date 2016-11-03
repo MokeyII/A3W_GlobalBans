@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:A3W_Bans"
         mc:Ignorable="d"
-        Title="Submit A Global Ban" Height="350" Width="525" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderThickness="0" BorderBrush="Black" Foreground="Black" Background="Black">
+        Title="Submit A Global Ban" Height="350" Width="525" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" BorderThickness="0" Background="#FFEAEAEA" >
     <Grid>
         <TextBox x:Name="txtID" HorizontalAlignment="Left" Height="24" Margin="92,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365"/>
         <TextBlock x:Name="lblBanType" HorizontalAlignment="Left" Margin="37,30,0,0" TextWrapping="Wrap" Text="Ban Type:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
@@ -13,7 +13,7 @@
         <TextBlock x:Name="lblBanTime" HorizontalAlignment="Left" Margin="35,81,0,0" TextWrapping="Wrap" Text="Ban Time:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
         <TextBlock x:Name="lblReason" HorizontalAlignment="Left" Margin="46,109,0,0" TextWrapping="Wrap" Text="Reason:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
         <TextBlock x:Name="lblProof" HorizontalAlignment="Left" Margin="56,139,0,0" TextWrapping="Wrap" Text="Proof:" VerticalAlignment="Top" Foreground="#FFAEA4A4"/>
-        <TextBox x:Name="txtBan" HorizontalAlignment="Left" Height="23" Margin="93,80,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="365"/>
+        <TextBox x:Name="txtBan" HorizontalAlignment="Left" Height="23" Margin="93,80,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="24"  IsEnabled="False"/>
         <TextBox x:Name="txtProof" HorizontalAlignment="Left" Height="141" Margin="93,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365" AcceptsReturn="True"/>
         <TextBox x:Name="txtReason" HorizontalAlignment="Left" Height="23" Margin="93,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365"/>
         <ComboBox x:Name="cmbBanType" HorizontalAlignment="Left" Margin="92,24,0,0" VerticalAlignment="Top" Width="120">

@@ -28,7 +28,7 @@ namespace A3W_Bans
        
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            string constring = "datasource=127.0.0.1;port=3306;username=root;password=12345;database=bans";
+            string constring = "datasource=192.223.30.108;port=3306;username=banadmin;password=12345;database=a3bans";
             string selectQuery = "DELETE FROM `bans` WHERE `bans`.`GUID` = ('" + this.txtGUID.Text + "') ;";
             MySqlConnection conDataBase = new MySqlConnection(constring);
             MySqlCommand cmdDataBase = new MySqlCommand(selectQuery, conDataBase);

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:A3W_Bans"
         mc:Ignorable="d"
-        Title="Login" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="0" Background="Black" WindowStyle="None">
+        Title="Login" Height="330.919" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderThickness="0" Background="#FFEAEAEA">
     <Grid RenderTransformOrigin="0.491,0.49">
         <GroupBox x:Name="gbLogin" Header="Login Credentials" HorizontalAlignment="Left" Margin="37,128,0,0" VerticalAlignment="Top" Height="144" Width="224" Foreground="#FFAEA4A4">
             <PasswordBox x:Name="txtSqlPassword" HorizontalAlignment="Left" Margin="81,46,0,0" VerticalAlignment="Top" Width="118" Height="23" Password="Password"/>
@@ -15,8 +15,8 @@
         <Label x:Name="lblPassword" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="58,189,0,0" RenderTransformOrigin="0.515,0.628" Height="26" Width="62" Background="{x:Null}" Foreground="#FFAEA4A4"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="99" Margin="102,25,0,0" VerticalAlignment="Top" Width="99"/>
         <Image x:Name="LoginImg_png" Margin="98,34,103,172" Source="LoginImg.png" Stretch="Fill"/>
-        <Button x:Name="btnSqlLogin" Content="Login" Margin="151,225,54,40" Click="btnSqlLogin_Click"/>
-        <Button x:Name="btnSqlCancel" Content="Cancel" Margin="51,225,154,40" Click="btnSqlCancel_Click"/>
+        <Button x:Name="btnSqlLogin" Content="Login" Margin="151,225,54,0" Click="btnSqlLogin_Click" Height="23" VerticalAlignment="Top"/>
+        <Button x:Name="btnSqlCancel" Content="Cancel" Margin="51,225,154,0" Click="btnSqlCancel_Click" Height="23" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

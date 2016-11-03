@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using A3W_Bans.Classes;
+using Newtonsoft.Json;
+//Gay
+
+//I hate community edition
+
 namespace A3W_Bans
 {
     /// <summary>
@@ -24,53 +21,59 @@ namespace A3W_Bans
             InitializeComponent();
             this.MouseLeftButtonDown += delegate { this.DragMove(); };
             txtSqlPassword.MaxLength = 16;
-            
+
         }
 
         private void btnSqlLogin_Click(object sender, RoutedEventArgs e)
         {
 
-            try
+            tAuthenticationResponse authenticationResult = new Classes.tAuthenticationResponse();
+
+            using (var client = new HttpClient())
             {
-                string dbConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
-                MySqlConnection conDataBase = new MySqlConnection(dbConnection);
-                MySqlCommand SelectCommand = new MySqlCommand("select * from bans.admins where Username = '" + this.txtSqlUserName.Text + "'and Password= '" + this.txtSqlPassword.Password + "' ;", conDataBase);
-                MySqlDataReader myReader;
-                conDataBase.Open();
-                myReader = SelectCommand.ExecuteReader();
-                int count = 0;
-                while (myReader.Read())
+                client.BaseAddress = new Uri("http://localhost:55071/");
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                tCredential credential = new Classes.tCredential();
+                credential.Username = txtSqlUserName.Text;
+                credential.Password = txtSqlPassword.Password;
+
+                string serializedBan = JsonConvert.SerializeObject(credential);
+
+                StringContent content = new StringContent(serializedBan, Encoding.UTF8, "application/json");
+
+
+                HttpResponseMessage response = client.PostAsync("A3Bans/LogIn", content).Result;
+
+                if (response.IsSuccessStatusCode)
                 {
-                    count = count + 1;
+                    string strResponse = response.Content.ReadAsStringAsync().Result;
+                    authenticationResult = JsonConvert.DeserializeObject<tAuthenticationResponse>(strResponse);
+
+                    
                 }
 
-                if (count == 1)
-                {
-                    MessageBox.Show("You Have Succesfully Logged Into A3W Bans Database, Please remember all of your bans are subject for review.");
-                    this.Hide();
-                    SubmitBan SubBan = new SubmitBan();
-                    SubBan.ShowDialog();
-                }
-
-                else if (count > 1)
-                {
-                    MessageBox.Show("Duplicate Username and Password!");
-                }
-
-                else
-                    MessageBox.Show("Incorrect Username or Password!");
-                    conDataBase.Close();
             }
-            catch (Exception ex)
+
+            if(authenticationResult.AuthenticationSuccess)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("You Have Succesfully Logged Into A3W Bans.");
+                this.Hide();
+                //SubmitBan SubBan = new SubmitBan();
+                //SubBan.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(authenticationResult.Message);
             }
         }
 
         public void userNameclr(object sender, RoutedEventArgs e)
         {
             txtSqlUserName.Text = string.Empty;
-            // if you want this to happen only the first time you can remove the event handler like this
             txtSqlUserName.GotFocus -= userNameclr;
             txtSqlPassword.Clear();
         }
@@ -79,5 +82,8 @@ namespace A3W_Bans
         {
             this.Close();
         }
+
+        
     }
+
 }

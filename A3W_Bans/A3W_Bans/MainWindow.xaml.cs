@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
+using System.Net.Http;
 using A3W_Bans.Classes;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Text;
+
 namespace A3W_Bans
 {
     /// <summary>
@@ -21,6 +15,8 @@ namespace A3W_Bans
     /// </summary>
     public partial class MainWindow : Window
     {
+        //DOnt make this static
+        HttpClient client = new HttpClient();
         public MainWindow()
         {
 
@@ -29,43 +25,98 @@ namespace A3W_Bans
             this.MouseLeftButtonDown += delegate { this.DragMove(); };
             this.Loaded += MainWindow_Loaded;
         }
+        private List<tBan> getBanListFromController()
+        {
+            Classes.tBanListReponse banListReponse = new tBanListReponse();
+            using (var client = new HttpClient())
+            {
+                //client.BaseAddress = new Uri("http://192.223.30.108:55071/");
+                client.BaseAddress = new Uri("http://localhost:55071/");
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = null;
+                try
+                {
+                    response = client.GetAsync("A3Bans/MainPage").Result;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Webserver is currently Down!");
+                }
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string strResponse = response.Content.ReadAsStringAsync().Result;
+                    try
+                    {
+                        banListReponse = JsonConvert.DeserializeObject<Classes.tBanListReponse>(strResponse);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+            }
+            return banListReponse.banList;
+        }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
-            List<tBan> bans = new List<Classes.tBan>();
-
-            string dbConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
-            MySqlConnection conDataBase = new MySqlConnection(dbConnection);
-            MySqlCommand SelectCommand = new MySqlCommand("select GUID,BanTime,Reason from bans.bans order by BanType asc", conDataBase);
-
-            MySqlDataReader dbReader;
-            conDataBase.Open();
-            dbReader = SelectCommand.ExecuteReader();
-
-            while (dbReader.Read())
-            {
-                tBan newBan = new tBan();
-
-                newBan.GuidOrIP = dbReader["GUID"].ToString();
-                newBan.BanTime = dbReader["BanTime"].ToString();
-                newBan.BanReason = dbReader["Reason"].ToString();
-
-                bans.Add(newBan);
-
-   
-            }
-            dbReader.Close();
-            conDataBase.Close();
-
-            dgBansList.ItemsSource = bans;
-
+            dgBansList.ItemsSource = getBanListFromController();
         }
+
 
         private void btnMainSubmitBan_Click(object sender, RoutedEventArgs e)
         {
             Login SqlLogin = new Login();
             SqlLogin.ShowDialog();
+            {
+
+                tAuthenticationResponse authenticationResult = new Classes.tAuthenticationResponse();
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:55071/");
+
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                    tCredential credential = new Classes.tCredential();
+                    credential.Username = SqlLogin.txtSqlUserName.Text;
+                    credential.Password = SqlLogin.txtSqlPassword.Password;
+
+                    string serializedBan = JsonConvert.SerializeObject(credential);
+
+                    StringContent content = new StringContent(serializedBan, Encoding.UTF8, "application/json");
+
+
+                    HttpResponseMessage response = client.PostAsync("A3Bans/LogIn", content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string strResponse = response.Content.ReadAsStringAsync().Result;
+                        authenticationResult = JsonConvert.DeserializeObject<tAuthenticationResponse>(strResponse);
+
+
+                    }
+
+                }
+
+                if (authenticationResult.AuthenticationSuccess)
+                {
+                    this.Hide();
+                    SubmitBan SubBan = new SubmitBan();
+                    SubBan.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show(authenticationResult.Message);
+                }
+            }
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -75,32 +126,7 @@ namespace A3W_Bans
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            List<tBan> bans = new List<Classes.tBan>();
-
-            string dbConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
-            MySqlConnection conDataBase = new MySqlConnection(dbConnection);
-            MySqlCommand SelectCommand = new MySqlCommand("select GUID,BanTime,Reason from bans.bans order by BanType asc", conDataBase);
-
-            MySqlDataReader dbReader;
-            conDataBase.Open();
-            dbReader = SelectCommand.ExecuteReader();
-
-            while (dbReader.Read())
-            {
-                tBan newBan = new tBan();
-
-                newBan.GuidOrIP = dbReader["GUID"].ToString();
-                newBan.BanTime = dbReader["BanTime"].ToString();
-                newBan.BanReason = dbReader["Reason"].ToString();
-
-               
-
-
-            }
-            dbReader.Close();
-            conDataBase.Close();
-
-            dgBansList.ItemsSource = bans;
+            dgBansList.ItemsSource = getBanListFromController();
         }
 
         private void dgBansList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,38 +136,46 @@ namespace A3W_Bans
 
         private void btnDLSql_Click(object sender, RoutedEventArgs e)
         {
-           
-            string dbConnection = "datasource=127.0.0.1;port=3306;username=root;password=12345";
-            MySqlConnection conDataBase = new MySqlConnection(dbConnection);
-            MySqlCommand SelectCommand = new MySqlCommand("select GUID,BanTime,Reason from bans.bans order by BanType asc", conDataBase);
+            List<tBan> tempList = getBanListFromController();
 
-            conDataBase.Open();
 
-            MySqlCommand command = conDataBase.CreateCommand();
-            MySqlDataReader dbReader = SelectCommand.ExecuteReader();
+                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                dlg.FileName = "a3bans";
+                dlg.DefaultExt = ".text";
+                dlg.Filter = "Text documents (.txt)|*.txt";
+                dlg.CreatePrompt = true;
+                dlg.OverwritePrompt = true;
 
-            if (dbReader != null)
-            {
-                System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\mccla\Desktop\A3Bans.txt", true);
+                Nullable<bool> result = dlg.ShowDialog();
 
-                while (dbReader.Read())
+                if (result == true)
                 {
-                    tBan newBan = new tBan();
-
-
-                    file.WriteLine(newBan.GuidOrIP = dbReader["GUID"].ToString());
-                    file.Write(newBan.BanTime = dbReader["BanTime"].ToString());
-                    file.Write(newBan.BanReason = dbReader["Reason"].ToString());
-                    
-
+                    // Save document
+                    string filename = dlg.FileName;
                 }
-                file.Close();
+
+                System.IO.StreamWriter file = new System.IO.StreamWriter(dlg.FileName, false);
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                tBan newBan = new tBan();
+
+                file.Write(newBan.GuidOrIP = tempList[i].GuidOrIP.ToString());
+                file.Write(" ");
+                file.Write(newBan.BanTime = tempList[i].BanTime.ToString());
+                file.Write(" ");
+                file.WriteLine(newBan.BanReason = tempList[i].BanReason.ToString());
             }
 
-            conDataBase.Close();
-            
-
+                file.Close();
         }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            Search BanSearch = new Search();
+            BanSearch.ShowDialog();
+        }
+    
     }
 }
 
